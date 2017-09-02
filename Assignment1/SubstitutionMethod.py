@@ -6,7 +6,7 @@ class SubstitutionMethod:
     def __init__(self, cipherText):
         self._cipher = cipherText
 
-    def RunMethod(self):
+    def runMethod(self):
         
         cipher1 = self._cipher
         
