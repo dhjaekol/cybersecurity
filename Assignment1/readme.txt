@@ -1,6 +1,6 @@
 Assignment 1 solution 
 	- See 'Assignment 1 answers.txt' in this submission for the decrypted text.
-	- To see output of both solutions, run Assignment1.py
+	- To see output of both solutions, run Assignment1.py. The decrypted messages will output to console. The keys are included in the files.
 
 Here's how I solved it:
 
