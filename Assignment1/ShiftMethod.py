@@ -22,7 +22,7 @@ class ShiftMethod:
                         shiftChar = shiftChar - 26
                     decrpytedText.append(chr(shiftChar))
                 except:
-                    print("Unexpected error:", sys.exc_info()[0])
+                    print("Unexpected error:")
                     raise
             for item in decrpytedText:
                 file.write("%s" % item)

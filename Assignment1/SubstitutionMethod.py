@@ -159,8 +159,7 @@ class SubstitutionMethod:
         # decrpytDict.update({'j': 'A'})
         # decrpytDict.update({'c': 'I'})
 
-        print (decrpytDict)
-
+        # print (decrpytDict)
 
         file.write("Decrpyt dictionary")
         file.write("\n")
@@ -186,8 +185,8 @@ class SubstitutionMethod:
 
         file.close()
 
-        #print(str(decrpytDict))
-        print(cipher1)
+        print("Decryption for problem 1: ")
+        #print(cipher1)
         print(''.join(decryptMsg))
 
         #   Find trigram that starts or ends with letter E

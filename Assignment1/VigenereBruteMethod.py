@@ -43,10 +43,13 @@ class VigenereBruteMethod:
                 # First try - only look at translations where first 5 letters of a word contain a vowel or Y
                 for letter in decrypedMessage[:5]:
                     if letter in ('a','e','i','o','u','y'):
-                        message = keyword + "\t" + decrypedMessage   + "\n"
+                        # message = keyword + "\t" + decrypedMessage   + "\n"
+                        message = decrypedMessage + "\n"
                         file.write(message)
                         break
-                # print(message)
+
+                print("Decryption for problem 2: ")
+                print(message)
 
         file.close()
 
