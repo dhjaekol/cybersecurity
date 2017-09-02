@@ -28,6 +28,7 @@ class VigenereBruteMethod:
 
         for keyword in keywords:
             goodKeyword = 1
+
             for letter in keyword:
                 # 97-122 - a-z
                 # 65-90 - A-Z
@@ -36,9 +37,10 @@ class VigenereBruteMethod:
                 else:
                     goodKeyword = 0
                     break
+
             if goodKeyword == 1:
                 decrypedMessage = self.translateMessage(keyword, cipher)
-
+                # First try - only look at translations where first 5 letters of a word contain a vowel or Y
                 for letter in decrypedMessage[:5]:
                     if letter in ('a','e','i','o','u','y'):
                         message = keyword + "\t" + decrypedMessage   + "\n"
