@@ -1,4 +1,5 @@
 import collections
+import argparse
 
 
 # from ShiftMethod import ShiftMethod
@@ -11,33 +12,83 @@ def main():
     #   -   -n  -   modulus
     #   -   --ciphertext
 
-    # public key
-    e = 211
-    n = 67063
+    parser = argparse.ArgumentParser(description="RSA algorithm.")
+    parser.add_argument('e', metavar='e', type=int, nargs='+', help='exponent')
+    parser.add_argument('m', metavar='n', type=int, nargs='+', help='modulus')
+    parser.add_argument('c', metavar='ciphertext', type=int, nargs='+', help='ciphertext')
 
-    p = 0
-    q = 0
+    args = parser.parse_args()
+    e = args.e
+    m = args.m
+    c = args.c
 
-    n = p * q
+    print("e = " + str(e))
+    print("m = " + str(m))
+    print("c = " + str(c))
 
-    phi = (p - 1)*(q - 1)
+    # Encrypt	m**e mod n = c
+    # (c / m**e)
 
-    # m = 42
-    # n = 3233
-    # d = 2753
-    # c = (m**e) % n
-    # m = (c**d) % n
+    # Decrypt	c**d mod n = m
 
-    # print ("c: " + str(c) + ", m: " + str(m))
-    print ("p: " + str(p))
-    print ("q: " + str(q))
-    print ("n: " + str(n))
 
-    print ("phi: " + str(phi))
+def xgcd(a,b):
+    prevx, x = 1, 0; prevy, y = 0, 1
 
-    # print ("d: " + str(d))
-    # print ("m: " + str(m))
+    print("prevx:" + prevx)
+    print("x:" + x)
+    print("prevy:" + prevy)
+    print("y:" + y)
+
+    print ("begin loop")
+    while b:
+        q = a/b
+
+        print ("q = a/b, q = " + str(q) + ", a=" + str(a) + ", b=" + str(b))
+
+        x, prevx = prevx - q*x, x
+
+        print("x, prevx = prevx - q*x, prevx=", str(prevx) +
+              ", q=" + str(q)
+              + ", x=" + str(x))
+
+        y, prevy = prevy - q*y, y
+
+        print("y, prevy = prevy - q*y, prevy", str(prevy) +
+              ", q=" + str(q) +
+              ", y=" + str(y))
+
+        a, b = b, a % b
+
+        print ("a, b = b, a % b -> a, " + str(a) +
+               ", b = " + str(b) +
+               ", y = " + str(y))
+
+    print ("end loop")
+
+    print ("return a, prevx, prevy - " +
+           "a = " + str(a) +
+           "prevx = " + str(prevx) +
+           "prevy = " + str(prevy))
+
+    return a, prevx, prevy
+
+
+# def gcd(a, b):
+#     if a == 0:
+#         return b
+#     return gcd(b%a, a)
+
+
+# def power(x, y, m):
+#     if y == 0:
+#         return 1
+#     p = power(x , y/2, m) % m
+#     p = (p * p) % m
+#     return (y%2 == 0)? p: (x * p) % ,
 
 
 if __name__ == "__main__":
     main()
+
+
