@@ -1,10 +1,6 @@
 import collections
 import argparse
 
-
-# from ShiftMethod import ShiftMethod
-
-
 def main():
     # crack_rsa.py [-h] -e INT -n -INT --ciphertext INT
     #   -   Reveal plain text from cipher text using RSA algorithm. All values are integers
@@ -64,7 +60,6 @@ def main():
     # egcd(e,phi)
     d = egcd(3,20)[1]
     # print(d)
-
 
     # 5. Decrypt -> c**d mod n = m
     m = c**d % n
