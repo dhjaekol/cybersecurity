@@ -20,7 +20,7 @@ def main():
     n = args.n[0]
     A = args.A[0]
     B = args.B[0]
-    print ("g:" + str(g) + ", n: " + str(n) + ", A: " + str(A) + ", B: " + str(B))
+    print ("g: " + str(g) + ", n: " + str(n) + ", A: " + str(A) + ", B: " + str(B))
 
     # Alice sends A to Bob and Bob sends B to Alice
     # Alice computes shared key k = Ba mod p
@@ -35,28 +35,49 @@ def main():
     # A = (g**a) % p
     # print("A: " + str(A))
 
+    ecgdA = egcd(A, B)
+    print(ecgdA)
 
+    modInv()
 
     # 3. Bob chooses a secret integer b whose value is 15 and computes
     # B = g**b % p = 5**15 % 23 = 19
-    b = 15
-    B = (g**b) % p
-    print("B: " + str(B))
+    # b = 15
+    # B = (g**b) % p
+    # print("B: " + str(B))
 
     # 4. Alice sends A to Bob and Bob sends B to Alice
 
     # 5. To obtain the shared secret, Alice computes k = B**a % p
-    ak = B**a % p
-    print("ak: " + str(ak))
+    # ak = B**a % p
+    # print("ak: " + str(ak))
 
     # 6. To object the shared secret, Bob computes k = A**b % p
-    bk = A**b % p
-    print("bk: " + str(bk))
+    # bk = A**b % p
+    # print("bk: " + str(bk))
 
     print ("Secret key of Alice (a): ")
     print ("Secret key of Bob (b): ")
     print ("Shared secret computed by Alice (B^a mod n): ")
     print ("Shared secret computed by Bob (A^b mod n):  ")
+
+def egcd(a, b):
+    x,y, u,v = 0,1, 1,0
+    while a != 0:
+        q, r = b//a, b%a
+        m, n = x-u*q, y-v*q
+        b,a, x,y, u,v = a,r, u,v, m,n
+    gcd = a
+    return gcd, x, y
+
+# http://www.geeksforgeeks.org/multiplicative-inverse-under-modulo-m/
+def modInv (a, b):
+    a = a%m
+    x = 1
+    while (x < m):
+        if (a*x) % m == 1:
+            return x
+        i = i + 1
 
 if __name__ == "__main__":
     main()
