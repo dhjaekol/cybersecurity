@@ -4,54 +4,48 @@ import collections
 import argparse
 
 def main():
-    # Usage: crack_dh.py [-h] -g INT -n INT --alice INT --bob INT
-    # -g = generator
-    # -n = modulus
-    # --alice (A)
-    # --bob (B)
-
+    # 5 23 8 19
     parser = buildParser()
     args = parser.parse_args()
     g, n, A, B = getParserArgs(args)
     p = n
 
-    # Alice sends A to Bob and Bob sends B to Alice
-    # Alice computes shared key k = Ba mod p
-    # Bob computes shared Key k = Ab mod p
-
     # 1. Alice and Bob agree on a prime number, p, and a base, g, in the open
     # p = 23
 
     # 2. Alice chooses a secret integer a whose value is 6 and computes
-    # A = g**a mod p
-    #   = 5**6 mod 23
-    #   = 8
-    # a = 6
-    # A = (g**a) % p
-    # print("A: " + str(A))
+    # A = g^a mod p
+    # A = 5^6 mod 23
 
-    a = modInv(g,p)
+    a = 0
+    a = naive_mod_inverse(A, a, g, p)
 
     # 3. Bob chooses a secret integer b whose value is 15 and computes
-    # B = g**b % p = 5**15 % 23 = 19
-    # b = 15
-    # B = (g**b) % p
-    # print("B: " + str(B))
+    # B = g**b % p
+
+    b = 0
+    b = naive_mod_inverse(B, b, g, p)
 
     # 4. Alice sends A to Bob and Bob sends B to Alice
 
     # 5. To obtain the shared secret, Alice computes k = B**a % p
-    # ak = B**a % p
-    # print("ak: " + str(ak))
+    aliceSharedSecret = B**a % p
 
     # 6. To object the shared secret, Bob computes k = A**b % p
-    # bk = A**b % p
-    # print("bk: " + str(bk))
+    bobSharedSecret = A**b % p
 
-    print ("Secret key of Alice (a): ")
-    print ("Secret key of Bob (b): ")
-    print ("Shared secret computed by Alice (B^a mod n): ")
-    print ("Shared secret computed by Bob (A^b mod n):  ")
+    print ("Secret key of Alice (a): " + str(a))
+    print ("Secret key of Bob (b): " + str(b))
+    print ("Shared secret computed by Alice (B^a mod n): " + str(aliceSharedSecret))
+    print ("Shared secret computed by Bob (A^b mod n):  " + str(bobSharedSecret))
+
+
+def naive_mod_inverse(A, a, g, p):
+    for a in range(p):
+        x = g ** a % p
+        if x == A:
+            break
+    return a
 
 
 # http://www.geeksforgeeks.org/multiplicative-inverse-under-modulo-m/
