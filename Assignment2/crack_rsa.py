@@ -2,11 +2,9 @@ import collections
 import argparse
 
 def main():
-    # crack_rsa.py [-h] -e INT -n -INT --ciphertext INT
-    #   -   Reveal plain text from cipher text using RSA algorithm. All values are integers
-    #   -   -e  -   exponent
-    #   -   -n  -   modulus
-    #   -   --ciphertext
+    # e, n, c
+    # 17 3233 855
+    # 3 33 13
 
     # Key generation
     #  1. Choose random primes p and q and compute n =  p * q
@@ -34,9 +32,9 @@ def main():
     n = n[0]
     c = c[0]
 
-    print("e = " + str(e))
-    print("n = " + str(n))
-    print("c = " + str(c))
+    # print("e = " + str(e))
+    # print("n = " + str(n))
+    # print("c = " + str(c))
 
     #  1. Choose random primes p and q and compute n =  p * q - Example: n = 4711 - p1 = 7, q1 = 673
     primeFactors = primes(n)
@@ -48,8 +46,8 @@ def main():
     #  2. Compute Euler function phi(n) = (p - 1) (q - 1)
     n = p * q
     phi = (p - 1)*(q - 1)
-    print(n)
-    print(phi)
+    # print(n)
+    # print(phi)
 
     #  3. Choose random encryption key e with gcd(e,  phi(n)) = 1
     #   We are given e
@@ -58,7 +56,7 @@ def main():
     #       that is   d.e = 1+ k phi(n), for some k
 
     # egcd(e,phi)
-    d = egcd(3,20)[1]
+    d = egcd(e,phi)[1] % phi
     # print(d)
 
     # 5. Decrypt -> c**d mod n = m
