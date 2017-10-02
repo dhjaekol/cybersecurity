@@ -30,7 +30,7 @@ def main():
             for commonPwd in commonPwds:
                 key_string = commonPwd
                 salt = pwdTuple[2]
-                saltedPwd = salt + key_string
+                saltedPwd = key_string + salt
                 hash = hashlib.md5((saltedPwd).encode("UTF-8")).hexdigest()
                 # file.write("cpwd: " + saltedPwd + ", hash: " + hash )
                 if (hash == pwdTuple[3]):
