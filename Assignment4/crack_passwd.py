@@ -14,10 +14,10 @@ def main():
     args = parser.parse_args()
     s, d = getParserArgs(args)
 
-    with open(d, encoding='utf-8') as f:
+    with open(d) as f:
         commonPwds = f.read().splitlines()
 
-    with open(s, encoding='utf-8') as f:
+    with open(s) as f:
         shadowFile = f.read().splitlines()
 
     # file = open("decrypt.txt", "w")
