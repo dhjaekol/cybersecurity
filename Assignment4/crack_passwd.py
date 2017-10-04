@@ -3,7 +3,8 @@
 import collections
 import argparse
 import hashlib
-import crypt
+from md5crypt import md5crypt
+import multiprocessing
 
 # crack_passwd.py [-h] -s SHADOW_FILE -d DICTIONARY_FILE
 # sample_shadow.txt
@@ -15,38 +16,49 @@ def main():
     args = parser.parse_args()
     s, d = getParserArgs(args)
 
-    with open(d, encoding='utf-8') as f:
+    with open(d,"r") as f:
         commonPwds = f.read().splitlines()
 
-    with open(s, encoding='utf-8') as f:
+    with open(s,"r") as f:
         shadowFile = f.read().splitlines()
 
-    # file = open("decrypt.txt", "w")
-    for pwd in shadowFile:
+    data = ( commonPwds, shadowFile )
+
+    # coreCount = multiprocessing.cpu_count()
+    # p = multiprocessing.Pool(coreCount)
+    # p.map(crackPassword, data)
+
+    crackPassword(data)
+
+def crackPassword ((commonPwds, shadowFileChunk)):
+    hashDict = {"dhjaekol":[("1","2")]}
+
+    for pwd in shadowFileChunk:
         rec = pwd.split(":")
         pwdTuple = rec[1].split("$")
 
-        # file.write("pwd:" + rec[1])
+        hashList = []
         if pwdTuple[1] == "1":
-            for commonPwd in commonPwds:
-                key_string = commonPwd
-                salt = pwdTuple[2]
-                saltedPwd = key_string + salt
+            salt = pwdTuple[2]
+            if salt in hashDict:
+                hashList = hashDict[salt]
+            else:
+                for commonPwd in commonPwds:
+                    key_string = commonPwd
+                    saltedPwd = key_string + salt
+                    hash = md5crypt(key_string, salt)
+                    hashSplit = hash.split("$")
+                    hashList.append((key_string, hashSplit[3]))
+                hashDict[salt] = hashList
 
-                hash = crypt.crypt(key_string, salt)   # hashlib.md5crypt(key_string, salt)
-                # file.write("cpwd: " + saltedPwd + ", hash: " + hash )
-                if (hash == pwdTuple[3]):
-                    print (rec[0] + ":" + commonPwd )
-
-    # file.close()
-
-    # print(lines)
-    # print(passwords)
+        for hash in hashList:
+            if (hash[1] == pwdTuple[3]):
+                print (rec[0] + ":" + hash[0] )
 
 def buildParser():
     parser = argparse.ArgumentParser(description="crack_passwd")
-    parser.add_argument('s', metavar='s', nargs='+', help='shadow_file')
-    parser.add_argument('d', metavar='d', nargs='+', help='dictionary_file')
+    parser.add_argument('-s', metavar='s', nargs='+', help='shadow_file')
+    parser.add_argument('-d', metavar='d', nargs='+', help='dictionary_file')
     return parser
 
 def getParserArgs(args):
