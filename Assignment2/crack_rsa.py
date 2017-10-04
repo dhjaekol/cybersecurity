@@ -21,14 +21,14 @@ def main():
     # Given c, (e, n) find m, d
 
     parser = argparse.ArgumentParser(description="RSA algorithm.")
-    parser.add_argument('e', metavar='e', type=int, nargs='+', help='exponent')
-    parser.add_argument('n', metavar='n', type=int, nargs='+', help='modulus')
-    parser.add_argument('c', metavar='ciphertext', type=int, nargs='+', help='ciphertext')
+    parser.add_argument('-e', metavar='e', type=int, nargs='+', help='exponent')
+    parser.add_argument('-n', metavar='n', type=int, nargs='+', help='modulus')
+    parser.add_argument('--ciphertext', metavar='ciphertext', type=int, nargs='+', help='ciphertext')
 
     args = parser.parse_args()
     e = args.e
     n = args.n
-    c = args.c
+    c = args.ciphertext
 
     e = e[0]
     n = n[0]

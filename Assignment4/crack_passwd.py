@@ -3,8 +3,7 @@
 import collections
 import argparse
 import hashlib
-import multiprocessing
-import base64
+import crypt
 
 # crack_passwd.py [-h] -s SHADOW_FILE -d DICTIONARY_FILE
 # sample_shadow.txt
@@ -16,10 +15,10 @@ def main():
     args = parser.parse_args()
     s, d = getParserArgs(args)
 
-    with open(d) as f:
+    with open(d, encoding='utf-8') as f:
         commonPwds = f.read().splitlines()
 
-    with open(s) as f:
+    with open(s, encoding='utf-8') as f:
         shadowFile = f.read().splitlines()
 
     # file = open("decrypt.txt", "w")
@@ -33,10 +32,10 @@ def main():
                 key_string = commonPwd
                 salt = pwdTuple[2]
                 saltedPwd = key_string + salt
-                hash = hashlib.md5((saltedPwd).encode("UTF-8")).hexdigest()
+
+                hash = crypt.crypt(key_string, salt)   # hashlib.md5crypt(key_string, salt)
                 # file.write("cpwd: " + saltedPwd + ", hash: " + hash )
-                encodeHash = base64.encodestring(hash)
-                if (encodeHash == pwdTuple[3]):
+                if (hash == pwdTuple[3]):
                     print (rec[0] + ":" + commonPwd )
 
     # file.close()
@@ -54,19 +53,6 @@ def getParserArgs(args):
     s = args.s[0]
     d = args.d[0]
     return s, d
-
-# https://stackoverflow.com/questions/2941995/python-ignore-incorrect-padding-error-when-base64-decoding
-def decode_base64(data):
-    """Decode base64, padding being optional.
-
-    :param data: Base64 data as an ASCII byte string
-    :returns: The decoded byte string.
-
-    """
-    missing_padding = len(data) % 4
-    if missing_padding != 0:
-        data += b'='* (4 - missing_padding)
-    return base64.decodestring(data)
 
 if __name__ == "__main__":
     main()

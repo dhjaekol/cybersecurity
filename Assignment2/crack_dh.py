@@ -71,18 +71,18 @@ def egcd(a, b):
 def getParserArgs(args):
     g = args.g[0]
     n = args.n[0]
-    A = args.A[0]
-    B = args.B[0]
+    A = args.alice[0]
+    B = args.bob[0]
     # print ("g: " + str(g) + ", n: " + str(n) + ", A: " + str(A) + ", B: " + str(B))
     return g, n, A, B
 
 
 def buildParser():
     parser = argparse.ArgumentParser(description="Diffie-Hellman")
-    parser.add_argument('g', metavar='g', type=int, nargs='+', help='generator')
-    parser.add_argument('n', metavar='n', type=int, nargs='+', help='modulus')
-    parser.add_argument('A', metavar='alice', type=int, nargs='+', help='alice')
-    parser.add_argument('B', metavar='bob', type=int, nargs='+', help='bob')
+    parser.add_argument('-g', metavar='g', type=int, nargs='+', help='generator')
+    parser.add_argument('-n', metavar='n', type=int, nargs='+', help='modulus')
+    parser.add_argument('--alice', metavar='alice', type=int, nargs='+', help='alice')
+    parser.add_argument('--bob', metavar='bob', type=int, nargs='+', help='bob')
     return parser
 
 
