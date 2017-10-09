@@ -17,7 +17,7 @@ def main():
     s, d = getParserArgs(args)
 
     with open(d,"r") as f:
-        commonPwds = f.read().splitlines()
+        commonPwds = f.read().split('|')
 
     with open(s,"r") as f:
         shadowFile = f.read().splitlines()
