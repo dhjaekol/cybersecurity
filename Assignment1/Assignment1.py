@@ -12,5 +12,6 @@ def main():
     print("")
     VigenereBruteMethod(cipher2).runMethod()
 
+
 if __name__ == "__main__":
     main()
