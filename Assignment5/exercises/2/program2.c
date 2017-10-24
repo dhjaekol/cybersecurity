@@ -1,4 +1,5 @@
-
+// 2**16 = 65536
+// 2*16 + 32 + 128 = 65696
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
