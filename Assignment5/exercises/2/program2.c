@@ -7,10 +7,10 @@
 #define MAX_NAME_LEN (32)
 
 struct record{
-	char record_name[MAX_NAME_LEN];
-	char record_buf[MAX_REC_LEN];
+	char record_name[MAX_NAME_LEN]; // 32
+	char record_buf[MAX_REC_LEN];   // 128
 	void (*print)(struct record *r);
-        unsigned short record_len;
+	unsigned short record_len;
 };
 
 void default_print_record(struct record *r)
@@ -18,12 +18,13 @@ void default_print_record(struct record *r)
 	printf("record: %s\n", r->record_buf);
 }
 
-struct record *newRecord(char *name, char *str)
+struct record *newRecord(char *name/*32*/, char *str/*128*/)
 {
 	struct record *rec = 0x0;
 
 	rec = malloc(sizeof(struct record));
 	if(!rec) return 0x0;
+
 
 	if(strlen(name) >= MAX_NAME_LEN){
 		free(rec);
@@ -50,6 +51,11 @@ void printDay()
 }
 
 int main(int argc, char **argv)
+/*
+1 - program name
+2 - record_name   - 32 
+3 - record        - 128
+*/
 {
 	struct record *my_record;
 
