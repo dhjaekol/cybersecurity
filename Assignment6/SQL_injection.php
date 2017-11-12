@@ -1,4 +1,13 @@
--- sql injection
+Task 5: SQL Injection
+Link: http://192.168.56.102/vulnerabilities/sqli/
+
+Description: Exploit the SQLi vulnerability present in the page and print the Firstname and Surname of all the users in the user table
+Deliverables (report)
+
+    Payload
+    A short note about the SQLi vulnerability
+    Screenshot of output
+
 
 <?php
 
@@ -8,9 +17,7 @@ if( isset( $_REQUEST[ 'Submit' ] ) ) {
 
     // Check database
     $query  = "SELECT first_name, last_name FROM users WHERE user_id = '$id';";
-    $result = mysqli_query($GLOBALS["___mysqli_ston"],  $query ) or 
-			  die( '<pre>' . ((is_object($GLOBALS["___mysqli_ston"])) ? 
-			  mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) . '</pre>' );
+    $result = mysqli_query($GLOBALS["___mysqli_ston"],  $query ) or die( '<pre>' . ((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) . '</pre>' );
 
     // Get results
     while( $row = mysqli_fetch_assoc( $result ) ) {
