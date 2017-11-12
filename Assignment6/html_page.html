@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+	<title>Login :: Damn Vulnerable Web Application (DVWA) v1.10 *Development*</title>
+	<link href="dvwa/css/login.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+	<div id="wrapper">
+		<div id="header">
+			<br/>
+
+			<p><img src="dvwa/images/login_logo.png"/></p>
+			<br/>
+
+		</div> <!--<div id="header">-->
+
+		<div id="content">
+			<form action="login.php" method="post">
+				<fieldset>
+					<label for="user">Username</label> <input class="loginInput" name="username" size="20" type="text"/><br/>
+					<label for="pass">Password</label> <input autocomplete="off" class="loginInput" name="password" size="20" type="password"/><br/>
+					<br/>
+					<p class="submit"><input name="Login" type="submit" value="Login"/></p>
+				</fieldset>
+				<input name="user_token" type="hidden" value="62092338885993d261d68f187256b226"/>
+			</form>
+		</div> <!--<div id="content">-->
+
+		<div id="footer">
+			<p><a href="" target="_blank">CMPS 499 Web Exploitation Challenge</a></p>
+		</div> <!--<div id="footer"> -->
+	</div> <!--<div id="wrapper"> -->
+</body>
+</html>

@@ -29,7 +29,7 @@ struct record *newRecord(char *name/*32*/, char *str/*128*/)
 
 	if(strlen(name) >= MAX_NAME_LEN){
 		free(rec);
-		return 0x0;
+		return 0x0;print
 	}
 	strcpy(rec->record_name, name);
 
@@ -69,3 +69,6 @@ int main(int argc, char **argv)
 		my_record->print(my_record);
 	return 0;
 }
+
+
+// ("x" * 65421
