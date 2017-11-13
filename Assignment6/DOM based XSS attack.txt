@@ -1,0 +1,42 @@
+Task 7: DOM based XSS attack
+Link: http://192.168.56.102/vulnerabilities/xss_d/
+Description: There’s a DOM based XSS vulnerability present in this page. Exploit the vulnerability and print your name in a pop up box.
+
+Deliverables (report)
+    Exploit payload
+    Tell us how you bypassed the input sanitization present in the code
+    Screenshot of your browser with pop up box
+
+<?php
+
+// Is there any input?
+if ( array_key_exists( "default", $_GET ) && !is_null ($_GET[ 'default' ]) ) {
+
+    # White list the allowable languages
+    switch ($_GET['default']) {
+        case "French":
+        case "English":
+        case "German":
+        case "Spanish":
+            # ok
+            break;
+        default:
+            header ("location: ?default=English");
+            exit;
+    }
+}
+
+?> 
+
+%3Cscript%3Ealert("Mark Thompson")%3C%2Fscript%3E
+
+About
+
+"Cross-Site Scripting (XSS)" attacks are a type of injection problem, in which malicious scripts are injected into the otherwise benign and trusted web sites. XSS attacks occur when an attacker uses a web application to send malicious code, generally in the form of a browser side script, to a different end user. Flaws that allow these attacks to succeed are quite widespread and occur anywhere a web application using input from a user in the output, without validating or encoding it.
+
+An attacker can use XSS to send a malicious script to an unsuspecting user. The end user's browser has no way to know that the script should not be trusted, and will execute the JavaScript. Because it thinks the script came from a trusted source, the malicious script can access any cookies, session tokens, or other sensitive information retained by your browser and used with that site. These scripts can even rewrite the content of the HTML page.
+
+DOM Based XSS is a special case of reflected where the JavaScript is hidden in the URL and pulled out by JavaScript in the page while it is rendering rather than being embedded in the page when it is served. This can make it stealthier than other attacks and WAFs or other protections which are reading the page body do not see any malicious content.
+
+?default=English<script>alert("Mark Thompson")</script>
+

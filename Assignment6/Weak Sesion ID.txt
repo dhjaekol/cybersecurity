@@ -1,0 +1,11 @@
+Weak Sesion ID
+
+Task 6: Weak Session ID
+Link: http://192.168.56.102/vulnerabilities/weak_id/
+Description: This page will set a new cookie called dvwaSession each time the button is clicked. Inspect the cookie using Tamper Data Firefox plugin or BurpSuite community edition. And answer the following 
+
+Deliverables (report)
+
+    Screenshots of at least two cookies in your interceptor (Burp/Tamperdata)
+    
+    Why do you think session identifier used in this link is vulnerable and what are your suggestions to improve the security of session identifier?
