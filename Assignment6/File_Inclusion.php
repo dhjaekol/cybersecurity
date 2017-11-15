@@ -60,3 +60,15 @@ drwxr-xr-x  2 www-data www-data 4096 Oct  4 10:45 source
 cd ../../../../www/blob/vulnerabilities/fi/file4.php;
 
 
+Notes from class
+- Upload a PHP file as an image file.
+- Use the link for the PHP file to use.
+- Download the first .gz file
+- Once image is there, rename to .php
+	- Use Task 2 command injection to rename the file (need root privleges)
+	- Use MV command
+- You can execute the image file as-is, don't need to rename it.
+- Calls back your machine from an open socket.
+- Run the netcat command on Windows.
+- Don't put -p
+- Use ncat for Windows - see link.
