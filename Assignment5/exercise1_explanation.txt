@@ -1,0 +1,7 @@
+Explanation of vulnerability in Problem 1
+
+The parameter 'char *str' in void function allow any number of characters. Anything
+above size of 8 will overflow buf[i] will overflow the subsequent variables on the
+stack. Using an exploit of 10 hexadecimal values '0x654d614c' will overflow 
+the check 'if (canary != CANARY)' and also (auth != 0) allowing 'Superuser'
+to be printed.
